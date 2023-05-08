@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<SplitPane fx:id="SplitPane" dividerPositions="0.8680917622523462" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+    <AnchorPane fx:id="canvasPane">
+         <children>
+            <Canvas fx:id="canvas" height="${canvasPane.height}" width="${canvasPane.width}" />
+         </children></AnchorPane>
+    <AnchorPane>
+         <children>
+            <TextField fx:id="numberToGeneratePoints" layoutX="11.0" layoutY="14.0" onAction="#onGenerateButtonClick" onKeyPressed="#formatTextFieldToNumbersOnly" prefHeight="33.0" prefWidth="120.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="10.0" />
+            <Button fx:id="generateButton" alignment="BOTTOM_LEFT" layoutX="31.0" layoutY="560.0" mnemonicParsing="false" onAction="#onGenerateButtonClick" text="Generate" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="31.0" />
+         </children></AnchorPane>
+  </items>
+</SplitPane>

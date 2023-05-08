@@ -123,7 +123,6 @@ public class FortuneAlgorithm {
                 (!rightBreakpointMovingRight && rightInitialX > convergencePoint.x));
         if (isValid && isBelow) {
             Event event = new Event(y.value, convergencePoint, middle);
-            System.out.println(convergencePoint);
             middle.event = event;
             events.add(event);
         }
