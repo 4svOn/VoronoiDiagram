@@ -1,8 +1,8 @@
 package hse.edu.cs.fortuneAlg;
 
 class Beachline {
-    private Arc root;
-    private  final Arc nullNode;
+    protected Arc root;
+    protected final Arc nullNode;
 
     Beachline() {
         this.nullNode = new Arc();
@@ -145,18 +145,18 @@ class Beachline {
             node.next.prev = node.prev;
     }
 
-    private double computeBreakPoint(Point point1, Point point2, double line) {
+    protected double computeBreakPoint(Point point1, Point point2, double line) {
         double x1 = point1.x, y1 = point1.y, x2 = point2.x, y2 = point2.y;
-        double d1 = 1.0 / (2.0 * (y1 - line));
-        double d2 = 1.0 / (2.0 * (y2 - line));
+        double d1 = 1D / (2D * (y1 - line));
+        double d2 = 1D / (2D * (y2 - line));
         double a = d1 - d2;
-        double b = 2.0 * (x2 * d2 - x1 * d1);
+        double b = 2D * (x2 * d2 - x1 * d1);
         double c = (y1 * y1 + x1 * x1 - line * line) * d1 - (y2 * y2 + x2 * x2 - line * line) * d2;
-        double delta = b * b - 4.0 * a * c;
-        return (-b + Math.sqrt(delta)) / (2.0 * a);
+        double delta = b * b - 4D * a * c;
+        return (-b + Math.sqrt(delta)) / (2D * a);
     }
 
-    private void insertFixup(Arc node) {
+    protected void insertFixup(Arc node) {
         while (node.parent.color == Arc.Color.RED) {
             if (node.parent == node.parent.parent.left) {
                 Arc anotherNode = node.parent.parent.right;
@@ -201,7 +201,7 @@ class Beachline {
         this.root.color = Arc.Color.BLACK;
     }
 
-    private void removeFixup(Arc node) {
+    protected void removeFixup(Arc node) {
         while (node != this.root && node.color == Arc.Color.BLACK)
         {
             Arc anotherNode;
@@ -266,7 +266,7 @@ class Beachline {
         node.color = Arc.Color.BLACK;
     }
 
-    private void leftRotate(Arc node) {
+    protected void leftRotate(Arc node) {
         Arc rightNode = node.right;
         node.right = rightNode.left;
         if (!isNullNode(rightNode.left))
@@ -282,7 +282,7 @@ class Beachline {
         node.parent = rightNode;
     }
 
-    private void rightRotate(Arc node) {
+    protected void rightRotate(Arc node) {
         Arc leftNode = node.left;
         node.left = leftNode.right;
         if (!isNullNode(leftNode.right))
@@ -298,7 +298,7 @@ class Beachline {
         node.parent = leftNode;
     }
 
-    private void transplant(Arc oldNode, Arc newNode) {
+    protected void transplant(Arc oldNode, Arc newNode) {
         if (isNullNode(oldNode.parent))
             this.root = newNode;
         else if (oldNode == oldNode.parent.left)
@@ -308,7 +308,7 @@ class Beachline {
         newNode.parent = oldNode.parent;
     }
 
-    private Arc minimum(Arc node) {
+    protected Arc minimum(Arc node) {
         while (!isNullNode(node.left))
             node = node.left;
         return node;

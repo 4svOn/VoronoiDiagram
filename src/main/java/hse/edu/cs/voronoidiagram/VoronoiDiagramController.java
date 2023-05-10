@@ -1,39 +1,56 @@
 package hse.edu.cs.voronoidiagram;
 
 import hse.edu.cs.fortuneAlg.*;
+import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
+
+import java.util.ArrayList;
 
 public class VoronoiDiagramController {
     @FXML
     private TextField numberToGeneratePoints;
 
     @FXML
-    private Button generateButton;
-
-    @FXML
     private Canvas canvas;
 
-    @FXML
-    private AnchorPane canvasPane;
-
     private VoronoiDiagram diagram;
+
+    private AnimationTimer animationTimer;
+
+    private final DoubleProperty beachlineY = new SimpleDoubleProperty();
+
+    private ArrayList<Point> sortedPoints = new ArrayList<>();
+
+    private final ArrayList<DiagramEdge> sortedDiagramEdges = new ArrayList<>();
 
     @FXML
     protected void onGenerateButtonClick()  {
         if (numberToGeneratePoints.getCharacters().isEmpty()) return;
         int pointsNumber = Integer.parseInt(numberToGeneratePoints.getCharacters().toString());
+        if (animationTimer != null)
+            animationTimer.stop();
 
-        FortuneAlgorithm algorithm = new FortuneAlgorithm(FortuneAlgorithm.generateRandomPoints(pointsNumber));
-        algorithm.constructVoronoiDiagram();
-        diagram = algorithm.getDiagram();
-        drawDiagram();
+        sortedPoints = FortuneAlgorithm.generateRandomPoints(pointsNumber);
+        sortedPoints.sort(null);
+
+        constructVoronoiDiagram();
+        drawDiagram(1.0);
+    }
+
+    @FXML
+    protected void onPlayAnimationButton() {
+        playAnimation(10000);
     }
 
     @FXML
@@ -47,21 +64,40 @@ public class VoronoiDiagramController {
 
     @FXML
     protected void redrawCanvas() {
-        drawDiagram();
+        drawDiagram(1.0);
     }
 
-    private void drawDiagram() {
-        if (diagram == null) return;
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        double width = canvas.getWidth(), height = canvas.getHeight();
-        gc.clearRect(0, 0, width, height);
-        gc.setLineWidth(3);
-        for (InitPoint initPoint : diagram.getInitPoints()) {
-            gc.strokeLine(initPoint.getPoint().x * width, initPoint.getPoint().y * height, initPoint.getPoint().x * width, initPoint.getPoint().y * height);
-        }
+    @FXML
+    public void onClickCanvas(MouseEvent mouseEvent) {
+        double x = mouseEvent.getX() / canvas.getWidth(), y = mouseEvent.getY() / canvas.getHeight();
+        sortedPoints.add(new Point(x, y));
+        constructVoronoiDiagram();
+        drawDiagram(1.0);
+    }
 
-        gc.setLineWidth(1);
-        gc.setStroke(Color.BLUE);
+    @FXML
+    public void onClearCanvasButton() {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        sortedPoints.clear();
+        if (animationTimer != null)
+            animationTimer.stop();
+    }
+
+    private void constructVoronoiDiagram() {
+        FortuneAlgorithm algorithm = new FortuneAlgorithm(sortedPoints);
+        algorithm.constructVoronoiDiagram();
+        diagram = algorithm.getDiagram();
+        sortedPoints.clear();
+        sortedDiagramEdges.clear();
+
+        // get points
+        for (InitPoint initPoint : diagram.getInitPoints()) {
+            sortedPoints.add(initPoint.getPoint());
+        }
+        sortedPoints.sort(null);
+
+        // get halfedges
         for (InitPoint initPoint : diagram.getInitPoints()) {
             Point center = initPoint.getPoint();
             Cell cell = initPoint.getCell();
@@ -76,13 +112,56 @@ public class VoronoiDiagramController {
             HalfEdge start = halfEdge;
             while (halfEdge != null) {
                 if (halfEdge.getOrigin() != null && halfEdge.getDestination() != null) {
-                    gc.strokeLine(halfEdge.getOrigin().getPoint().x * width, halfEdge.getOrigin().getPoint().y * height,
-                            halfEdge.getDestination().getPoint().x * width, halfEdge.getDestination().getPoint().y * height);
+                    sortedDiagramEdges.add(new DiagramEdge(halfEdge));
                 }
                 halfEdge = halfEdge.getNext();
                 if (halfEdge == start)
                     break;
             }
         }
+        sortedDiagramEdges.sort(null);
+    }
+
+    private void drawDiagram(double line) {
+        if (diagram == null) return;
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        double width = canvas.getWidth(), height = canvas.getHeight();
+        gc.clearRect(0, 0, width, height);
+        gc.setLineWidth(3);
+        gc.setStroke(Color.BLACK);
+        for (Point point : sortedPoints) {
+            gc.strokeLine(point.x * width, point.y * height, point.x * width, point.y * height);
+        }
+        gc.setLineWidth(1);
+        gc.setStroke(Color.BLUE);
+        for (DiagramEdge diagramEdge : sortedDiagramEdges) {
+            if (Double.compare(diagramEdge.getMaxY(), line) <= 0)
+                diagramEdge.draw(gc);
+            else break;
+        }
+    }
+
+    private void playAnimation(long durationInMillis) {
+        if (diagram == null) return;
+        AnimatedFortuneAlgorithm algorithm = new AnimatedFortuneAlgorithm(sortedPoints, canvas.getGraphicsContext2D());
+        animationTimer = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                double line = beachlineY.doubleValue();
+                algorithm.updateVoronoiDiagram(line);
+            }
+        };
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.millis(0),
+                        actionEvent -> animationTimer.start(),
+                        new KeyValue(beachlineY, 1.0)
+                ),
+                new KeyFrame(Duration.millis(durationInMillis),
+                        actionEvent -> animationTimer.stop(),
+                        new KeyValue(beachlineY, -0.1)
+                )
+        );
+        timeline.play();
     }
 }

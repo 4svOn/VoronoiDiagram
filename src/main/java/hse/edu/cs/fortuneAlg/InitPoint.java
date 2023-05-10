@@ -1,12 +1,10 @@
 package hse.edu.cs.fortuneAlg;
 
 public class InitPoint {
-    int index;
     private final Point point;
     Cell cell;
 
-    InitPoint(int index, Point point) {
-        this.index = index;
+    InitPoint(Point point) {
         this.point = point;
     }
 

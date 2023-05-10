@@ -4,14 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="992b4523-f353-40bd-b732-1cd1f5746217" name="Changes" comment="Fortune Algo">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/hse/edu/cs/voronoidiagram/tmp.fxml" afterDir="false" />
+    <list default="true" id="992b4523-f353-40bd-b732-1cd1f5746217" name="Changes" comment="added animation">
+      <change afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/AnimatedArc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/AnimatedBeachline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/AnimatedFortuneAlgorithm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/DiagramEdge.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/Beachline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/Beachline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/Cell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/FortuneAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/FortuneAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/VoronoiDiagramController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/InitPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/InitPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/VoronoiDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/VoronoiDiagram.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/VoronoiDiagramApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/VoronoiDiagramApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hse/edu/cs/voronoidiagram/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hse/edu/cs/voronoidiagram/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/VoronoiDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/VoronoiDiagramController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hse/edu/cs/voronoidiagram/tmp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hse/edu/cs/voronoidiagram/tmp.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +35,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="88bc8df1-1993-4fb7-b388-93a088cfcb1e" />
+        <option name="url" value="https://github.com/4svOn/VoronoiDiagram" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="ProjectId" id="2P69NA654GdqdqUpwA5kZ2MB1SX" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -59,19 +80,28 @@
       <recent name="$PROJECT_DIR$/src/main/resources/hse/edu/cs/voronoidiagram" />
     </key>
   </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn javafx:run" />
+    </option>
+  </component>
   <component name="RunManager" selected="Application.VoronoiDiagramApplication">
     <configuration name="VoronoiDiagramApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="hse.edu.cs.voronoidiagram.VoronoiDiagramApplication" />
       <module name="VoronoiDiagram" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="hse.edu.cs.voronoidiagram.*" />
+          <option name="PATTERN" value="hse.edu.cs.fortuneAlg.DiagramEdge" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="VoronoiDiagram-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/VoronoiDiagram-1.0-SNAPSHOT.jar" />
+      <method v="2" />
     </configuration>
     <configuration name="mvnw" type="ShConfigurationType" temporary="true">
       <option name="SCRIPT_TEXT" value="" />
@@ -91,6 +121,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.VoronoiDiagramApplication" />
+        <item itemvalue="JAR Application.VoronoiDiagram-1.0-SNAPSHOT.jar" />
         <item itemvalue="Shell Script.mvnw" />
       </list>
     </recent_temporary>
@@ -119,6 +150,11 @@
       <workItem from="1683544766035" duration="5347000" />
       <workItem from="1683569419015" duration="8427000" />
       <workItem from="1683588437434" duration="56000" />
+      <workItem from="1683588502424" duration="66000" />
+      <workItem from="1683628261280" duration="13797000" />
+      <workItem from="1683667136684" duration="43000" />
+      <workItem from="1683667211467" duration="12474000" />
+      <workItem from="1683715678855" duration="7990000" />
     </task>
     <task id="LOCAL-00001" summary="Fortune Algo">
       <created>1683467872655</created>
@@ -127,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683467872655</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added simple app">
+      <created>1683588546377</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1683588546377</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,7 +189,20 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fortune Algo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fortune Algo" />
+    <MESSAGE value="added simple app" />
+    <MESSAGE value="added animation" />
+    <option name="LAST_COMMIT_MESSAGE" value="added animation" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/AnimatedBeachline.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

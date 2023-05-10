@@ -5,10 +5,10 @@ import java.util.PriorityQueue;
 import java.util.Random;
 
 public class FortuneAlgorithm {
-    private final VoronoiDiagram diagram;
-    private final PriorityQueue<Event> events = new PriorityQueue<>();
-    private final Beachline beachline = new Beachline();
-    private double beachlineY;
+    protected final VoronoiDiagram diagram;
+    protected final PriorityQueue<Event> events = new PriorityQueue<>();
+    protected Beachline beachline = new Beachline();
+    protected double beachlineY;
 
     public FortuneAlgorithm(ArrayList<Point> points) {
         diagram = new VoronoiDiagram(points);
@@ -24,23 +24,23 @@ public class FortuneAlgorithm {
         }
 
         while (!events.isEmpty()) {
-            Event currentEvent = events.poll();
-            if (!currentEvent.isValid())
-                continue;
-//            if (currentEvent.getType() == Event.EventType.Circle) {
-//            System.out.println(currentEvent.y);
-//            }
-            beachlineY = currentEvent.y;
-            if (currentEvent.getType() == Event.EventType.Point)
-                handleInitPointEvent(currentEvent);
-            else
-                handleCircleEvent(currentEvent);
+            processEvent(events.poll());
         }
 
         boundDiagram();
     }
 
-    private void handleInitPointEvent(Event event) {
+    protected void processEvent(Event event) {
+        if (!event.isValid())
+            return;
+        beachlineY = event.y;
+        if (event.getType() == Event.EventType.Point)
+            handleInitPointEvent(event);
+        else
+            handleCircleEvent(event);
+    }
+
+    protected void handleInitPointEvent(Event event) {
         InitPoint initPoint = event.getInitPoint();
         if (beachline.isEmpty()) {
             beachline.setRoot(beachline.createArc(initPoint));
@@ -64,7 +64,7 @@ public class FortuneAlgorithm {
             addEvent(middleArc, rightArc, rightArc.next);
     }
 
-    private void handleCircleEvent(Event event) {
+    protected void handleCircleEvent(Event event) {
         Point point = event.getPoint();
         Arc arc = event.getArc();
         // Add cell point
@@ -84,7 +84,7 @@ public class FortuneAlgorithm {
             addEvent(leftArc, rightArc, rightArc.next);
     }
 
-    private Arc breakArc(Arc arc, InitPoint initPoint) {
+    protected Arc breakArc(Arc arc, InitPoint initPoint) {
         // Create a new subtree
         Arc middleArc = beachline.createArc(initPoint);
         Arc leftArc = beachline.createArc(arc.initPoint);
@@ -98,7 +98,7 @@ public class FortuneAlgorithm {
         return middleArc;
     }
 
-    private void addEdge(Arc left, Arc right) {
+    protected void addEdge(Arc left, Arc right) {
         // Create two new half edges
         left.rightHalfEdge = diagram.createHalfEdge(left.initPoint.cell);
         right.leftHalfEdge = diagram.createHalfEdge(right.initPoint.cell);
@@ -107,7 +107,7 @@ public class FortuneAlgorithm {
         right.leftHalfEdge.twin = left.rightHalfEdge;
     }
 
-    private void addEvent(Arc left, Arc middle, Arc right) {
+    protected void addEvent(Arc left, Arc middle, Arc right) {
         DoubleWrapper y = new DoubleWrapper();
         Point convergencePoint = computeConvergencePoint(left.initPoint.getPoint(), middle.initPoint.getPoint(), right.initPoint.getPoint(), y);
         boolean isBelow = Double.compare(y.value, beachlineY) <= 0; // <=
@@ -128,7 +128,7 @@ public class FortuneAlgorithm {
         }
     }
 
-    private Point computeConvergencePoint(Point point1, Point point2, Point point3, DoubleWrapper y) {
+    protected Point computeConvergencePoint(Point point1, Point point2, Point point3, DoubleWrapper y) {
         Point v1 = Point.sub(point1, point2).getOrthogonal();
         Point v2 = Point.sub(point2, point3).getOrthogonal();
         Point delta = Point.sub(point3, point1);
@@ -143,15 +143,15 @@ public class FortuneAlgorithm {
         return center;
     }
 
-    private boolean isMovingRight(Arc left, Arc right) {
+    protected boolean isMovingRight(Arc left, Arc right) {
         return left.initPoint.getPoint().y < right.initPoint.getPoint().y;
     }
 
-    private double getInitialX(Arc left, Arc right, boolean movingRight) {
+    protected double getInitialX(Arc left, Arc right, boolean movingRight) {
         return movingRight ? left.initPoint.getPoint().x : right.initPoint.getPoint().x;
     }
 
-    private void removeArc(Arc arc, CellPoint cellPoint) {
+    protected void removeArc(Arc arc, CellPoint cellPoint) {
         // End edges
         setDestination(arc.prev, arc, cellPoint);
         setDestination(arc, arc.next, cellPoint);
@@ -169,17 +169,18 @@ public class FortuneAlgorithm {
         setPrevHalfEdge(nextHalfEdge, arc.next.leftHalfEdge);
     }
 
-    private void setDestination(Arc left, Arc right, CellPoint cellPoint) {
+    protected void
+    setDestination(Arc left, Arc right, CellPoint cellPoint) {
         left.rightHalfEdge.origin = cellPoint;
         right.leftHalfEdge.destination = cellPoint;
     }
 
-    private void setOrigin(Arc left, Arc right, CellPoint cellPoint) {
+    protected void setOrigin(Arc left, Arc right, CellPoint cellPoint) {
         left.rightHalfEdge.destination = cellPoint;
         right.leftHalfEdge.origin = cellPoint;
     }
 
-    private void setPrevHalfEdge(HalfEdge prev, HalfEdge next) {
+    protected void setPrevHalfEdge(HalfEdge prev, HalfEdge next) {
         prev.next = next;
         next.prev = prev;
     }
@@ -197,23 +198,24 @@ public class FortuneAlgorithm {
             leftArc = rightArc;
             rightArc = rightArc.next;
         }
+        beachline.setRoot(beachline.nullNode);
     }
 
-    private Point getIntersection(Point point, Point direction) {
+    protected Point getIntersection(Point point, Point direction) {
         double t;
         Point intersection;
-        //if (Double.compare(direction.x, 0.0) > 0)
-        if (direction.x > 0.0)
-            t = (2.0 - point.x) / direction.x;
+        //if (Double.compare(direction.x, 0D) > 0)
+        if (direction.x > 0D)
+            t = (2D - point.x) / direction.x;
         else
-            t = (-1.0 - point.x) / direction.x;
+            t = (-1D - point.x) / direction.x;
         intersection = Point.sum(point, Point.mul(direction, t));
         double newT;
-        //if (Double.compare(direction.y, 0.0) > 0)
-        if (direction.y > 0.0)
-            newT = (2.0 - point.y) / direction.y;
+        //if (Double.compare(direction.y, 0D) > 0)
+        if (direction.y > 0D)
+            newT = (2D - point.y) / direction.y;
         else
-            newT = (-1.0 - point.y) / direction.y;
+            newT = (-1D - point.y) / direction.y;
         if (Double.compare(newT, t) < 0)
             intersection = Point.sum(point, Point.mul(direction, newT));
         return intersection;
@@ -225,16 +227,6 @@ public class FortuneAlgorithm {
         for (int i = 0; i < n; ++i) {
             points.add(new Point(random.nextDouble(), random.nextDouble()));
         }
-        return points;
-    }
-
-    public static ArrayList<Point> generatePoints() {
-        ArrayList<Point> points = new ArrayList<>(4);
-        points.add(new Point(0.25, 0.25));
-        points.add(new Point(0.75, 0.25001));
-        points.add(new Point(0.25, 0.75));
-        points.add(new Point(0.75, 0.75001));
-        //points.add(new Point(0.5, 0.5));
         return points;
     }
 }

@@ -5,20 +5,21 @@ import java.util.LinkedList;
 
 public class VoronoiDiagram {
     private final ArrayList<InitPoint> initPoints = new ArrayList<>();
-    private final ArrayList<Cell> cells = new ArrayList<>();
     private final LinkedList<CellPoint> cellPoints = new LinkedList<>();
     private final LinkedList<HalfEdge> halfEdges = new LinkedList<>();
 
+    private ArrayList<Point> points;
+
     VoronoiDiagram(ArrayList<Point> points) {
+        this.points = points;
         initPoints.ensureCapacity(points.size());
-        cells.ensureCapacity(points.size());
         for(int i = 0; i < points.size(); ++i) {
-            initPoints.add(i, new InitPoint(i, points.get(i)));
-            cells.add(i, new Cell());
-            initPoints.get(i).setCell(cells.get(i));
-            cells.get(i).setInitPoint(initPoints.get(i));
+            initPoints.add(i, new InitPoint(points.get(i)));
+            initPoints.get(i).setCell(new Cell());
         }
     }
+
+    public ArrayList<Point> getPoints() { return points; }
 
     public ArrayList<InitPoint> getInitPoints() {
         return this.initPoints;
@@ -35,5 +36,9 @@ public class VoronoiDiagram {
         CellPoint cellPoint = new CellPoint(point);
         cellPoints.add(cellPoint);
         return cellPoint;
+    }
+
+    LinkedList<CellPoint> getCellPoints() {
+        return cellPoints;
     }
 }
