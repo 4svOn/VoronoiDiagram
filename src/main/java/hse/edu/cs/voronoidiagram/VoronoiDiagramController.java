@@ -86,7 +86,7 @@ public class VoronoiDiagramController {
 
     private void constructVoronoiDiagram() {
         FortuneAlgorithm algorithm = new FortuneAlgorithm(sortedPoints);
-        algorithm.constructVoronoiDiagram();
+        algorithm.construct();
         diagram = algorithm.getDiagram();
         sortedPoints.clear();
         sortedDiagramEdges.clear();

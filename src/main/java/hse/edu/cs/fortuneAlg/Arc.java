@@ -1,6 +1,6 @@
 package hse.edu.cs.fortuneAlg;
 
-class Arc {
+public class Arc {
 
     // Hierarchy in tree
     Arc parent, left, right;

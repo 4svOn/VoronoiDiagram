@@ -1,6 +1,6 @@
 package hse.edu.cs.fortuneAlg;
 
-class Beachline {
+public class Beachline {
     protected Arc root;
     protected final Arc nullNode;
 

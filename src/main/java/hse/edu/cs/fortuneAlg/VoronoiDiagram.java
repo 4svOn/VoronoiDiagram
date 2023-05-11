@@ -8,18 +8,13 @@ public class VoronoiDiagram {
     private final LinkedList<CellPoint> cellPoints = new LinkedList<>();
     private final LinkedList<HalfEdge> halfEdges = new LinkedList<>();
 
-    private ArrayList<Point> points;
-
     VoronoiDiagram(ArrayList<Point> points) {
-        this.points = points;
         initPoints.ensureCapacity(points.size());
         for(int i = 0; i < points.size(); ++i) {
             initPoints.add(i, new InitPoint(points.get(i)));
             initPoints.get(i).setCell(new Cell());
         }
     }
-
-    public ArrayList<Point> getPoints() { return points; }
 
     public ArrayList<InitPoint> getInitPoints() {
         return this.initPoints;

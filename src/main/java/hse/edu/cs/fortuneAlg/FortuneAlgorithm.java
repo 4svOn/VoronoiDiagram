@@ -18,7 +18,7 @@ public class FortuneAlgorithm {
         return diagram;
     }
 
-    public void constructVoronoiDiagram() {
+    public void construct() {
         for(InitPoint initPoint : diagram.getInitPoints()) {
             events.add(new Event(initPoint));
         }
@@ -35,12 +35,12 @@ public class FortuneAlgorithm {
             return;
         beachlineY = event.y;
         if (event.getType() == Event.EventType.Point)
-            handleInitPointEvent(event);
+            handlePointEvent(event);
         else
             handleCircleEvent(event);
     }
 
-    protected void handleInitPointEvent(Event event) {
+    protected void handlePointEvent(Event event) {
         InitPoint initPoint = event.getInitPoint();
         if (beachline.isEmpty()) {
             beachline.setRoot(beachline.createArc(initPoint));
@@ -100,18 +100,17 @@ public class FortuneAlgorithm {
 
     protected void addEdge(Arc left, Arc right) {
         // Create two new half edges
-        left.rightHalfEdge = diagram.createHalfEdge(left.initPoint.cell);
-        right.leftHalfEdge = diagram.createHalfEdge(right.initPoint.cell);
+        left.rightHalfEdge = diagram.createHalfEdge(left.initPoint.getCell());
+        right.leftHalfEdge = diagram.createHalfEdge(right.initPoint.getCell());
         // Set the two half edges twins
-        left.rightHalfEdge.twin = right.leftHalfEdge;
-        right.leftHalfEdge.twin = left.rightHalfEdge;
+        left.rightHalfEdge.setTwin(right.leftHalfEdge);
+        right.leftHalfEdge.setTwin(left.rightHalfEdge);
     }
 
     protected void addEvent(Arc left, Arc middle, Arc right) {
         DoubleWrapper y = new DoubleWrapper();
         Point convergencePoint = computeConvergencePoint(left.initPoint.getPoint(), middle.initPoint.getPoint(), right.initPoint.getPoint(), y);
         boolean isBelow = Double.compare(y.value, beachlineY) <= 0; // <=
-        //boolean isBelow = y.value <= beachlineY;
         boolean leftBreakpointMovingRight = isMovingRight(left, middle);
         boolean rightBreakpointMovingRight = isMovingRight(middle, right);
         double leftInitialX = getInitialX(left, middle, leftBreakpointMovingRight);
@@ -128,17 +127,17 @@ public class FortuneAlgorithm {
         }
     }
 
-    protected Point computeConvergencePoint(Point point1, Point point2, Point point3, DoubleWrapper y) {
-        Point v1 = Point.sub(point1, point2).getOrthogonal();
-        Point v2 = Point.sub(point2, point3).getOrthogonal();
-        Point delta = Point.sub(point3, point1);
+    protected Point computeConvergencePoint(Point p1, Point p2, Point p3, DoubleWrapper y) {
+        Point v1 = Point.sub(p1, p2).getOrthogonal();
+        Point v2 = Point.sub(p2, p3).getOrthogonal();
+        Point delta = Point.sub(p3, p1);
         delta.mul(0.5);
         double t = delta.getDet(v2) / v1.getDet(v2);
-        Point center = Point.sum(point1, point2);
+        Point center = Point.sum(p1, p2);
         center.mul(0.5);
         v1.mul(t);
         center.add(v1);
-        double r = center.getDistance(point1);
+        double r = center.getDistance(p1);
         y.value = center.y - r;
         return center;
     }
@@ -156,8 +155,8 @@ public class FortuneAlgorithm {
         setDestination(arc.prev, arc, cellPoint);
         setDestination(arc, arc.next, cellPoint);
         // Join the edges of the middle arc
-        arc.leftHalfEdge.next = arc.rightHalfEdge;
-        arc.rightHalfEdge.prev = arc.leftHalfEdge;
+        arc.leftHalfEdge.setNext(arc.rightHalfEdge);
+        arc.rightHalfEdge.setPrev(arc.leftHalfEdge);
         // Update beachline
         beachline.remove(arc);
         // Create a new edge
@@ -171,21 +170,21 @@ public class FortuneAlgorithm {
 
     protected void
     setDestination(Arc left, Arc right, CellPoint cellPoint) {
-        left.rightHalfEdge.origin = cellPoint;
-        right.leftHalfEdge.destination = cellPoint;
+        left.rightHalfEdge.setOrigin(cellPoint);
+        right.leftHalfEdge.setDestination(cellPoint);
     }
 
     protected void setOrigin(Arc left, Arc right, CellPoint cellPoint) {
-        left.rightHalfEdge.destination = cellPoint;
-        right.leftHalfEdge.origin = cellPoint;
+        left.rightHalfEdge.setDestination(cellPoint);
+        right.leftHalfEdge.setOrigin(cellPoint);
     }
 
     protected void setPrevHalfEdge(HalfEdge prev, HalfEdge next) {
-        prev.next = next;
-        next.prev = prev;
+        prev.setNext(next);
+        next.setPrev(prev);
     }
 
-    public void boundDiagram() {
+    protected void boundDiagram() {
         if (beachline.isEmpty()) return;
         Arc leftArc = beachline.getLeastArc();
         Arc rightArc = leftArc.next;

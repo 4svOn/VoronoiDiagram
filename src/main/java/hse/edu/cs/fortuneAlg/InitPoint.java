@@ -2,7 +2,7 @@ package hse.edu.cs.fortuneAlg;
 
 public class InitPoint {
     private final Point point;
-    Cell cell;
+    private Cell cell;
 
     InitPoint(Point point) {
         this.point = point;
