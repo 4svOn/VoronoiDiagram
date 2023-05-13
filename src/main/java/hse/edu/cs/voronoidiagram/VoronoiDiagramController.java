@@ -48,6 +48,8 @@ public class VoronoiDiagramController {
 
     private final Alert informationAlert = new Alert(Alert.AlertType.INFORMATION);
 
+    private final String lineSeparator = "\n";
+
     @FXML
     protected void onGenerateButtonClick()  {
         if (numberToGeneratePoints.getCharacters().isEmpty()) return;
@@ -108,7 +110,7 @@ public class VoronoiDiagramController {
     protected void onDrawDiagramButton() {
         stopAnimation();
         String text = textArea.getText().strip();
-        String[] tokens = text.split(" +|" + System.lineSeparator() + "+");
+        String[] tokens = text.split(" +|" + lineSeparator + "+");
         Alert alert = new Alert(Alert.AlertType.WARNING);
         if (tokens.length % 2 == 1) {
             alert.setTitle("Warning!");
@@ -162,7 +164,7 @@ public class VoronoiDiagramController {
                     text.append(", ");
                 }
             }
-            text.append(System.lineSeparator());
+            text.append(lineSeparator);
         }
         textArea.setText(text.toString());
         getDiagram.setText("Get points");
@@ -171,7 +173,7 @@ public class VoronoiDiagramController {
     private void showPointsInTextArea() {
         StringBuilder text = new StringBuilder();
         for (Point point : diagramPoints) {
-            text.append(point).append(System.lineSeparator());
+            text.append(point).append(lineSeparator);
         }
         textArea.setText(text.toString());
         getDiagram.setText("Get diagram");
@@ -182,12 +184,12 @@ public class VoronoiDiagramController {
         informationAlert.setTitle("Help");
         informationAlert.setHeaderText("Here is some information about using the text field");
         String alertText = "Points are output according to the following pattern: " +
-                System.lineSeparator() + "point1.x point1.y" + System.lineSeparator() +
-                "point1.x point1.y" + System.lineSeparator() + "..." + System.lineSeparator() +
-                "You can add your own points to this list" + System.lineSeparator() + System.lineSeparator() +
-                "Diagram is output according to the following pattern:" + System.lineSeparator() +
-                "point1.x point1.y: segment1.x1 segment1.y1 segment1.x2 segment1.y2, ..." + System.lineSeparator() +
-                System.lineSeparator() + "!All points belong to the segment from 0 to 1!" ;
+                lineSeparator + "point1.x point1.y" + lineSeparator +
+                "point1.x point1.y" + lineSeparator + "..." + lineSeparator +
+                "You can add your own points to this list" + lineSeparator + lineSeparator +
+                "Diagram is output according to the following pattern:" + lineSeparator +
+                "point1.x point1.y: segment1.x1 segment1.y1 segment1.x2 segment1.y2, ..." + lineSeparator +
+                lineSeparator + "!All points belong to the segment from 0 to 1!" ;
         informationAlert.setContentText(alertText);
         informationAlert.show();
     }
