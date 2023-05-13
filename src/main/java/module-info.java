@@ -1,7 +1,6 @@
 module hse.edu.cs.voronoidiagram {
     requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.web;
 
     opens hse.edu.cs.voronoidiagram to javafx.fxml;
     exports hse.edu.cs.voronoidiagram;
