@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,9 +14,9 @@ public class VoronoiDiagramApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("tmp.fxml"));
         Parent root = fxmlLoader.load();
-        System.out.println(Screen.getPrimary().getBounds());
 
         stage.setScene(new Scene(root));
+        stage.setTitle("Voronoi Diagram");
         stage.show();
     }
 

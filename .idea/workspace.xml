@@ -6,14 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="992b4523-f353-40bd-b732-1cd1f5746217" name="Changes" comment="added animation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/Arc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/Arc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/Beachline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/Beachline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/CellPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/CellPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/FortuneAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/FortuneAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/HalfEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/HalfEdge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/InitPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/InitPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/VoronoiDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/fortuneAlg/VoronoiDiagram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/DiagramEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/DiagramEdge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/VoronoiDiagramApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/VoronoiDiagramApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/VoronoiDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/VoronoiDiagramController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hse/edu/cs/voronoidiagram/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hse/edu/cs/voronoidiagram/tmp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hse/edu/cs/voronoidiagram/tmp.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,41 +40,32 @@
       </UrlAndAccount>
     </option>
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
   <component name="ProjectId" id="2P69NA654GdqdqUpwA5kZ2MB1SX" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "/home/dim-dezhin/IdeaProjects/VoronoiDiagram/src/main/resources/hse/edu/cs/voronoidiagram",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.40574712",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/dim-dezhin/IdeaProjects/VoronoiDiagram/src/main/resources/hse/edu/cs/voronoidiagram&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.40574712&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/hse/edu/cs/voronoidiagram" />
@@ -158,7 +146,8 @@
       <workItem from="1683667136684" duration="43000" />
       <workItem from="1683667211467" duration="12474000" />
       <workItem from="1683715678855" duration="7990000" />
-      <workItem from="1683824672516" duration="8630000" />
+      <workItem from="1683930974579" duration="5039000" />
+      <workItem from="1683969853636" duration="2222000" />
     </task>
     <task id="LOCAL-00001" summary="Fortune Algo">
       <created>1683467872655</created>
