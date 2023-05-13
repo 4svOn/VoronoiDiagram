@@ -15,12 +15,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
 
 public class VoronoiDiagramController {
+
+    @FXML
+    private HBox mainPane;
+
+    @FXML
+    private FlowPane controlPane;
+
     @FXML
     private TextField numberToGeneratePoints;
 
@@ -291,5 +300,21 @@ public class VoronoiDiagramController {
             animationTimer.start();
             animationButton.setText("Stop animation");
         }
+    }
+
+    @FXML
+    protected void handleWidthChange() {
+        canvas.setWidth(mainPane.getWidth() - 200);
+        controlPane.setPrefWidth(200);
+        if (animationTimer == null)
+            drawDiagram();
+    }
+
+    @FXML
+    protected void handleHeightChange() {
+        canvas.setHeight(mainPane.getHeight());
+        textArea.setPrefHeight(mainPane.getHeight() - 300);
+        if (animationTimer == null)
+            drawDiagram();
     }
 }

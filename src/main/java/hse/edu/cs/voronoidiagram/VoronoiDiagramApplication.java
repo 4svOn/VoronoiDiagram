@@ -12,11 +12,13 @@ public class VoronoiDiagramApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("tmp.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("VoronoiDiagram.fxml"));
         Parent root = fxmlLoader.load();
 
         stage.setScene(new Scene(root));
         stage.setTitle("Voronoi Diagram");
+        stage.setMinHeight(400);
+        stage.setMinWidth(600);
         stage.show();
     }
 

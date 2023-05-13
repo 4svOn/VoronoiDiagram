@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hse.edu.cs.voronoidiagram.VoronoiDiagramController">
+<HBox fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="300" minWidth="400" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hse.edu.cs.voronoidiagram.VoronoiDiagramController" onWidthChange="#handleWidthChange" onHeightChange="#handleHeightChange">
    <children>
-      <Pane prefHeight="800.0" prefWidth="1000.0" HBox.hgrow="ALWAYS">
+      <Pane prefHeight="600.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
          <children>
-            <Canvas fx:id="canvas" height="800.0" onMouseClicked="#onClickCanvas" width="1000.0" />
+            <Canvas fx:id="canvas" height="600.0" onMouseClicked="#onClickCanvas" width="600.0" />
          </children>
       </Pane>
-      <FlowPane onMouseClicked="#onClickCanvas" prefHeight="800.0" prefWidth="200.0" style="-fx-background-color: #8a7f8e;" HBox.hgrow="ALWAYS">
+      <FlowPane fx:id="controlPane" onMouseClicked="#onClickCanvas" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #8a7f8e;" >
          <children>
             <TextField fx:id="numberToGeneratePoints" onKeyPressed="#formatTextFieldToNumbersOnly" prefHeight="60.0" prefWidth="90.0">
                <font>
@@ -42,7 +42,7 @@
                   <Insets left="40.0" right="40.0" top="20.0" />
                </FlowPane.margin>
             </Button>
-            <TextArea fx:id="textArea" prefHeight="500.0" prefWidth="200.0">
+            <TextArea fx:id="textArea" prefHeight="300.0" prefWidth="200.0">
                <FlowPane.margin>
                   <Insets top="20.0" />
                </FlowPane.margin>
