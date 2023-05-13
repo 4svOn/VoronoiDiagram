@@ -40,6 +40,8 @@ public class VoronoiDiagramController {
 
     private AnimationTimer animationTimer;
 
+    private Timeline animationTimeline;
+
     private final DoubleProperty beachlineY = new SimpleDoubleProperty();
 
     private ArrayList<Point> diagramPoints = new ArrayList<>();
@@ -261,7 +263,7 @@ public class VoronoiDiagramController {
             }
         };
 
-        Timeline timeline = new Timeline(
+        animationTimeline = new Timeline(
                 new KeyFrame(Duration.millis(0),
                         actionEvent -> startAnimation(),
                         new KeyValue(beachlineY, 1.0)
@@ -271,11 +273,12 @@ public class VoronoiDiagramController {
                         new KeyValue(beachlineY, -0.1)
                 )
         );
-        timeline.play();
+        animationTimeline.play();
     }
 
     private void stopAnimation() {
         if (animationTimer != null) {
+            animationTimeline.stop();
             animationTimer.stop();
             animationTimer = null;
             drawDiagram();
