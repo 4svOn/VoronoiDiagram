@@ -106,6 +106,7 @@ public class VoronoiDiagramController {
 
     @FXML
     protected void onDrawDiagramButton() {
+        stopAnimation();
         String text = textArea.getText().strip();
         String[] tokens = text.split(" +|" + System.lineSeparator() + "+");
         Alert alert = new Alert(Alert.AlertType.WARNING);

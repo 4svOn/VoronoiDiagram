@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="992b4523-f353-40bd-b732-1cd1f5746217" name="Changes" comment="added animation">
+    <list default="true" id="992b4523-f353-40bd-b732-1cd1f5746217" name="Changes" comment="added text field">
+      <change afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/DiagramEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/DiagramEdge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/VoronoiDiagramApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/VoronoiDiagramApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/VoronoiDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hse/edu/cs/voronoidiagram/VoronoiDiagramController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/hse/edu/cs/voronoidiagram/hello-view.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/hse/edu/cs/voronoidiagram/tmp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hse/edu/cs/voronoidiagram/tmp.fxml" afterDir="false" />
     </list>
@@ -39,6 +40,9 @@
         <option name="url" value="https://github.com/4svOn/VoronoiDiagram" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2P69NA654GdqdqUpwA5kZ2MB1SX" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -76,9 +80,9 @@
       <command value="mvn javafx:run" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.VoronoiDiagramApplication">
+  <component name="RunManager" selected="JAR Application.VoronoiDiagram-1.0-SNAPSHOT-shaded.jar">
     <configuration name="VoronoiDiagramApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="hse.edu.cs.voronoidiagram.VoronoiDiagramApplication" />
+      <option name="MAIN_CLASS_NAME" value="hse.edu.cs.Main" />
       <module name="VoronoiDiagram" />
       <extension name="coverage">
         <pattern>
@@ -89,6 +93,10 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="VoronoiDiagram-1.0-SNAPSHOT-shaded.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/VoronoiDiagram-1.0-SNAPSHOT-shaded.jar" />
+      <method v="2" />
     </configuration>
     <configuration name="VoronoiDiagram-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/target/VoronoiDiagram-1.0-SNAPSHOT.jar" />
@@ -111,6 +119,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JAR Application.VoronoiDiagram-1.0-SNAPSHOT-shaded.jar" />
         <item itemvalue="Application.VoronoiDiagramApplication" />
         <item itemvalue="JAR Application.VoronoiDiagram-1.0-SNAPSHOT.jar" />
         <item itemvalue="Shell Script.mvnw" />
@@ -147,7 +156,8 @@
       <workItem from="1683667211467" duration="12474000" />
       <workItem from="1683715678855" duration="7990000" />
       <workItem from="1683930974579" duration="5039000" />
-      <workItem from="1683969853636" duration="2222000" />
+      <workItem from="1683969853636" duration="3658000" />
+      <workItem from="1683973776400" duration="221000" />
     </task>
     <task id="LOCAL-00001" summary="Fortune Algo">
       <created>1683467872655</created>
@@ -163,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683588546377</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added text field">
+      <created>1683972401570</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683972401570</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,7 +201,8 @@
     <MESSAGE value="Fortune Algo" />
     <MESSAGE value="added simple app" />
     <MESSAGE value="added animation" />
-    <option name="LAST_COMMIT_MESSAGE" value="added animation" />
+    <MESSAGE value="added text field" />
+    <option name="LAST_COMMIT_MESSAGE" value="added text field" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
