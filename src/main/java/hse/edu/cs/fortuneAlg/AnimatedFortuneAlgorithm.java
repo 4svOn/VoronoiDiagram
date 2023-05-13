@@ -1,16 +1,14 @@
 package hse.edu.cs.fortuneAlg;
 
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
 public class AnimatedFortuneAlgorithm extends FortuneAlgorithm {
 
-    private final GraphicsContext graphicsContext;
+    private final Canvas canvas;
     private final AnimatedBeachline animatedBeachline;
-    private final double width;
-    private final double height;
 
     private class EdgeToDraw{
         Point p1, p2;
@@ -21,32 +19,32 @@ public class AnimatedFortuneAlgorithm extends FortuneAlgorithm {
         }
 
         void draw() {
-            graphicsContext.strokeLine(p1.x * width, p1.y * height, p2.x * width, p2.y * height);
+            canvas.getGraphicsContext2D().strokeLine(p1.x * canvas.getWidth(), p1.y * canvas.getHeight(),
+                                                    p2.x * canvas.getWidth(), p2.y * canvas.getHeight());
         }
     }
 
     private final ArrayList<EdgeToDraw> edgesToDraw = new ArrayList<>();
 
-    public AnimatedFortuneAlgorithm(ArrayList<Point> points, GraphicsContext graphicsContext) {
+    public AnimatedFortuneAlgorithm(ArrayList<Point> points, Canvas canvas) {
         super(points);
-        this.graphicsContext = graphicsContext;
-        width = graphicsContext.getCanvas().getWidth();
-        height = graphicsContext.getCanvas().getHeight();
+        this.canvas = canvas;
 
         for(InitPoint initPoint : diagram.getInitPoints()) {
             events.add(new Event(initPoint));
         }
         drawInitPoints();
 
-        animatedBeachline = new AnimatedBeachline(graphicsContext);
+        animatedBeachline = new AnimatedBeachline(this.canvas);
         beachline = animatedBeachline;
     }
 
     public void updateVoronoiDiagram(double line) {
         drawInitPoints();
-        graphicsContext.setLineWidth(3);
-        graphicsContext.setStroke(Color.CRIMSON);
-        graphicsContext.strokeLine(0, line * height, width, line * height);
+        canvas.getGraphicsContext2D().setLineWidth(3);
+        canvas.getGraphicsContext2D().setStroke(Color.CRIMSON);
+        canvas.getGraphicsContext2D().strokeLine(0, line * canvas.getHeight(), canvas.getWidth(),
+                line * canvas.getHeight());
 
         while (!events.isEmpty() && Double.compare(events.peek().y, line) >= 0) {
             processEvent(events.poll());
@@ -74,32 +72,32 @@ public class AnimatedFortuneAlgorithm extends FortuneAlgorithm {
     }
 
     private void drawEdges() {
-        graphicsContext.setStroke(Color.BLUE);
-        graphicsContext.setLineWidth(1);
+        canvas.getGraphicsContext2D().setStroke(Color.BLUE);
+        canvas.getGraphicsContext2D().setLineWidth(1);
         for (EdgeToDraw edge : edgesToDraw) {
             edge.draw();
         }
     }
 
     private void drawInitPoints() {
-        graphicsContext.clearRect(0D, 0D, width, height);
-        graphicsContext.setLineWidth(3);
-        graphicsContext.setStroke(Color.BLACK);
+        canvas.getGraphicsContext2D().clearRect(0D, 0D, canvas.getWidth(), canvas.getHeight());
+        canvas.getGraphicsContext2D().setLineWidth(3);
+        canvas.getGraphicsContext2D().setStroke(Color.BLACK);
         for(InitPoint initPoint : diagram.getInitPoints()) {
-            graphicsContext.strokeLine(
-                    initPoint.getPoint().x * width, initPoint.getPoint().y * height,
-                    initPoint.getPoint().x * width, initPoint.getPoint().y * height
+            canvas.getGraphicsContext2D().strokeLine(
+                    initPoint.getPoint().x * canvas.getWidth(), initPoint.getPoint().y * canvas.getHeight(),
+                    initPoint.getPoint().x * canvas.getWidth(), initPoint.getPoint().y * canvas.getHeight()
             );
         }
     }
 
     private void drawCellPoints() {
-        graphicsContext.setLineWidth(4);
-        graphicsContext.setStroke(Color.DARKBLUE);
+        canvas.getGraphicsContext2D().setLineWidth(4);
+        canvas.getGraphicsContext2D().setStroke(Color.DARKBLUE);
         for (CellPoint cellPoint : diagram.getCellPoints()) {
-            graphicsContext.strokeLine(
-                    cellPoint.getPoint().x * width, cellPoint.getPoint().y * height,
-                    cellPoint.getPoint().x * width, cellPoint.getPoint().y * height
+            canvas.getGraphicsContext2D().strokeLine(
+                    cellPoint.getPoint().x * canvas.getWidth(), cellPoint.getPoint().y * canvas.getHeight(),
+                    cellPoint.getPoint().x * canvas.getWidth(), cellPoint.getPoint().y * canvas.getHeight()
             );
         }
     }

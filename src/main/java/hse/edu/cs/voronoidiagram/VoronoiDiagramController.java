@@ -263,7 +263,7 @@ public class VoronoiDiagramController {
 
     private void playAnimation(long durationInMillis) {
         if (diagram == null) return;
-        AnimatedFortuneAlgorithm algorithm = new AnimatedFortuneAlgorithm(diagramPoints, canvas.getGraphicsContext2D());
+        AnimatedFortuneAlgorithm algorithm = new AnimatedFortuneAlgorithm(diagramPoints, canvas);
         animationTimer = new AnimationTimer() {
             @Override
             public void handle(long l) {
