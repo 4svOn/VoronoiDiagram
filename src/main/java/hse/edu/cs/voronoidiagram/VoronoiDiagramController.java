@@ -21,6 +21,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class VoronoiDiagramController {
 
@@ -60,6 +61,8 @@ public class VoronoiDiagramController {
     private final Alert informationAlert = new Alert(Alert.AlertType.INFORMATION);
 
     private final String lineSeparator = "\n";
+
+    private final Random random = new Random(System.currentTimeMillis());
 
     @FXML
     protected void onGenerateButtonClick()  {
@@ -101,7 +104,9 @@ public class VoronoiDiagramController {
     protected void onClickCanvas(MouseEvent mouseEvent) {
         stopAnimation();
         double x = mouseEvent.getX() / canvas.getWidth(), y = mouseEvent.getY() / canvas.getHeight();
-        diagramPoints.add(new Point(x, y));
+        Point point = new Point(x, y);
+        addEpsToPoint(point);
+        diagramPoints.add(point);
         constructVoronoiDiagram();
         drawDiagram();
         showPointsInTextArea();
@@ -121,7 +126,7 @@ public class VoronoiDiagramController {
     protected void onDrawDiagramButton() {
         stopAnimation();
         String text = textArea.getText().strip();
-        String[] tokens = text.split(" +|" + lineSeparator + "+");
+        String[] tokens = text.split("( |" + lineSeparator + ")+");
         Alert alert = new Alert(Alert.AlertType.WARNING);
         if (tokens.length % 2 == 1) {
             alert.setTitle("Warning!");
@@ -153,7 +158,9 @@ public class VoronoiDiagramController {
 
         diagramPoints.clear();
         for (int i = 0; i < doubles.size(); i += 2) {
-            diagramPoints.add(new Point(doubles.get(i), doubles.get(i + 1)));
+            Point point = new Point(doubles.get(i), doubles.get(i + 1));
+            addEpsToPoint(point);
+            diagramPoints.add(point);
         }
         constructVoronoiDiagram();
         drawDiagram();
@@ -209,13 +216,7 @@ public class VoronoiDiagramController {
         FortuneAlgorithm algorithm = new FortuneAlgorithm(diagramPoints);
         algorithm.construct();
         diagram = algorithm.getDiagram();
-        diagramPoints.clear();
         cellEdges.clear();
-
-        // get points
-        for (InitPoint initPoint : diagram.getInitPoints()) {
-            diagramPoints.add(initPoint.getPoint());
-        }
 
         // get halfedges
         for (InitPoint initPoint : diagram.getInitPoints()) {
@@ -316,5 +317,10 @@ public class VoronoiDiagramController {
         textArea.setPrefHeight(mainPane.getHeight() - 300);
         if (animationTimer == null)
             drawDiagram();
+    }
+
+    private void addEpsToPoint(Point point) {
+        point.x += random.nextDouble(0.0000001);
+        point.y += random.nextDouble(0.0000001);
     }
 }
